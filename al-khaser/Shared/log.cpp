@@ -29,8 +29,6 @@ TCHAR* print_time()
 }
 void log_print(const TCHAR* filename, const TCHAR *fmt, ...)
 {
-	return;
-
 	va_list list;
 	const TCHAR *p, *r;
 	int e;
