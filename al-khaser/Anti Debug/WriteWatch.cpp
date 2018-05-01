@@ -1,5 +1,6 @@
 #include <Windows.h>
 #include <cstdio>
+#include <tchar.h>
 #include "WriteWatch.h"
 
 /*

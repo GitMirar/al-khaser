@@ -73,7 +73,7 @@ BOOL NtQueryObject_ObjectAllTypesInformation()
 		POBJECT_TYPE_INFORMATION pObjectTypeInfo = (POBJECT_TYPE_INFORMATION)pObjInfoLocation;
 
 		// The debug object will always be present
-		if (StrCmp(_T("DebugObject"), pObjectTypeInfo->TypeName.Buffer) == 0)
+		if (_tcsstr(_T("DebugObject"), pObjectTypeInfo->TypeName.Buffer) == 0)
 		{
 			// Are there any objects?
 			if (pObjectTypeInfo->TotalNumberOfObjects > 0)

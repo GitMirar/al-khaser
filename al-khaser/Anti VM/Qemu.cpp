@@ -7,7 +7,7 @@ Registry key values
 VOID qemu_reg_key_value()
 {
 	/* Array of strings of blacklisted registry key values */
-	TCHAR *szEntries[][3] = {
+	CONST TCHAR *szEntries[][3] = {
 		{ _T("HARDWARE\\DEVICEMAP\\Scsi\\Scsi Port 0\\Scsi Bus 0\\Target Id 0\\Logical Unit Id 0"), _T("Identifier"), _T("QEMU") },
 		{ _T("HARDWARE\\Description\\System"), _T("SystemBiosVersion"), _T("QEMU") },
 	};
@@ -33,7 +33,7 @@ Check for process list
 
 VOID qemu_processes()
 {
-	TCHAR *szProcesses[] = {
+	CONST TCHAR *szProcesses[] = {
 		_T("qemu-ga.exe"),
 	};
 

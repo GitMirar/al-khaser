@@ -6,7 +6,7 @@ Check against VMWare registry key values
 VOID vmware_reg_key_value()
 {
 	/* Array of strings of blacklisted registry key values */
-	TCHAR *szEntries[][3] = {
+	CONST TCHAR *szEntries[][3] = {
 		{ _T("HARDWARE\\DEVICEMAP\\Scsi\\Scsi Port 0\\Scsi Bus 0\\Target Id 0\\Logical Unit Id 0"), _T("Identifier"), _T("VMWARE") },
 		{ _T("HARDWARE\\DEVICEMAP\\Scsi\\Scsi Port 1\\Scsi Bus 0\\Target Id 0\\Logical Unit Id 0"), _T("Identifier"), _T("VMWARE") },
 		{ _T("HARDWARE\\DEVICEMAP\\Scsi\\Scsi Port 2\\Scsi Bus 0\\Target Id 0\\Logical Unit Id 0"), _T("Identifier"), _T("VMWARE") },
@@ -35,7 +35,7 @@ Check against VMWare registry keys
 VOID vmware_reg_keys()
 {
 	/* Array of strings of blacklisted registry keys */
-	TCHAR* szKeys[] = {
+	CONST TCHAR* szKeys[] = {
 		_T("SOFTWARE\\VMware, Inc.\\VMware Tools"),
 	};
 
@@ -60,7 +60,7 @@ Check against VMWare blacklisted files
 VOID vmware_files()
 {
 	/* Array of strings of blacklisted paths */
-	TCHAR* szPaths[] = {
+	CONST TCHAR* szPaths[] = {
 		_T("system32\\drivers\\vmmouse.sys"),
 		_T("system32\\drivers\\vmhgfs.sys"),
 		_T("system32\\drivers\\vm3dmp.sys"),
@@ -116,7 +116,7 @@ Check VMWare NIC MAC addresses
 VOID vmware_mac()
 {
 	/* VMWre blacklisted mac adr */
-	TCHAR *szMac[][2] = {
+	CONST TCHAR *szMac[][2] = {
 		{ _T("\x00\x05\x69"), _T("00:05:69") }, // VMWare, Inc.
 		{ _T("\x00\x0C\x29"), _T("00:0c:29") }, // VMWare, Inc.
 		{ _T("\x00\x1C\x14"), _T("00:1C:14") }, // VMWare, Inc.
@@ -143,7 +143,7 @@ Check against VMWare adapter name
 */
 BOOL vmware_adapter_name()
 {
-	TCHAR* szAdapterName = _T("VMWare");
+	CONST TCHAR* szAdapterName = _T("VMWare");
 	if (check_adapter_name(szAdapterName))
 		return TRUE;
 	else
@@ -156,7 +156,7 @@ Check against VMWare pseaudo-devices
 */
 VOID vmware_devices()
 {
-	TCHAR *devices[] = {
+	CONST TCHAR *devices[] = {
 		_T("\\\\.\\HGFS"),
 		_T("\\\\.\\vmci"),
 	};
@@ -182,7 +182,7 @@ Check for process list
 
 VOID vmware_processes()
 {
-	TCHAR *szProcesses[] = {
+	CONST TCHAR *szProcesses[] = {
 		_T("vmtoolsd.exe"),
 		_T("vmwaretray.exe"),
 		_T("vmwareuser.exe"),

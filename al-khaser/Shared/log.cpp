@@ -19,7 +19,9 @@ TCHAR* print_time()
 	TCHAR *timestr = _tasctime(localtime(&t));
 	timestr[_tcsclen(timestr) - 1] = 0;  //Getting rid of \n
 
-	size = (_tcsclen(timestr) + 1 + 2) * sizeof(TCHAR); //Additional +2 for square braces
+	// size computation seems to be off
+	//size = (_tcsclen(timestr) + 1 + 2) * sizeof(TCHAR); //Additional +2 for square braces
+	size = 0x400;
 	buf = (TCHAR*)malloc(size);
 
 	memset(buf, 0x0, size);
@@ -27,10 +29,12 @@ TCHAR* print_time()
 
 	return buf;
 }
-void log_print(TCHAR* filename, TCHAR *fmt, ...)
+void log_print(const TCHAR* filename, const TCHAR *fmt, ...)
 {
+	return;
+
 	va_list list;
-	TCHAR *p, *r;
+	const TCHAR *p, *r;
 	int e;
 
 	if (SESSION_TRACKER > 0)

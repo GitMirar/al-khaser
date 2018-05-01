@@ -1,4 +1,6 @@
+#include <SDKDDKVer.h>
 #include <stdio.h>
+#include <Windows.h>
 #include "Shared\Main.h"
 
 int main(void)
@@ -30,7 +32,7 @@ int main(void)
 
 	/* Debugger Detection */
 	if (ENABLE_DEBUG_CHECKS) {
-		print_category(TEXT("Debugger Detection"));
+		print_category(_T("Debugger Detection"));
 		exec_check(&IsDebuggerPresentAPI, TEXT("Checking IsDebuggerPresent API () "));
 		exec_check(&IsDebuggerPresentPEB, TEXT("Checking PEB.BeingDebugged "));
 		exec_check(&CheckRemoteDebuggerPresentAPI, TEXT("Checking CheckRemoteDebuggerPresentAPI () "));

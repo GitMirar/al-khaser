@@ -34,7 +34,7 @@ VOID print_not_detected()
 	SetConsoleTextAttribute(nStdHandle, OriginalColors);
 }
 
-VOID print_category(TCHAR* text)
+VOID print_category(CONST TCHAR* text)
 {
 	/* Get handle to standard output */
 	HANDLE nStdHandle = GetStdHandle(STD_OUTPUT_HANDLE);  
@@ -50,7 +50,7 @@ VOID print_category(TCHAR* text)
 	SetConsoleTextAttribute(nStdHandle, OriginalColors);
 }
 
-VOID print_results(int result, TCHAR* szMsg)
+VOID print_results(int result, CONST TCHAR* szMsg)
 {
 	_tprintf(TEXT("[*] %s"), szMsg);
 
@@ -72,7 +72,7 @@ VOID print_results(int result, TCHAR* szMsg)
 	LOG_PRINT(buffer);
 }
 
-VOID exec_check(int(*callback)(), TCHAR* szMsg) 
+VOID exec_check(int(*callback)(), CONST TCHAR* szMsg) 
 {
 	/* Call our check */
 	int result = callback();
@@ -105,7 +105,7 @@ VOID print_os()
 	}
 }
 
-VOID print_last_error(LPTSTR lpszFunction) 
+VOID print_last_error(CONST TCHAR* lpszFunction) 
 { 
     // Retrieve the system error message for the last-error code
 

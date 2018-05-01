@@ -6,7 +6,7 @@ Check for process list
 
 VOID parallels_process()
 {
-	TCHAR *szProcesses[] = {
+	CONST TCHAR *szProcesses[] = {
 		_T("prl_cc.exe"),
 		_T("prl_tools.exe"),
 	};

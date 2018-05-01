@@ -17,20 +17,20 @@
 #include "Common.h"
 
 BOOL IsWoW64();
-BOOL Is_RegKeyValueExists(HKEY hKey, TCHAR* lpSubKey, TCHAR* lpValueName, TCHAR* search_str);
-BOOL Is_RegKeyExists(HKEY hKey, TCHAR* lpSubKey);
+BOOL Is_RegKeyValueExists(HKEY hKey, CONST TCHAR* lpSubKey, CONST TCHAR* lpValueName, CONST TCHAR* search_str);
+BOOL Is_RegKeyExists(HKEY hKey, CONST TCHAR* lpSubKey);
 BOOL is_FileExists(TCHAR* szPath);
 BOOL is_DirectoryExists(TCHAR* szPath);
-BOOL check_mac_addr(TCHAR* szMac);
-BOOL check_adapter_name(TCHAR* szName);
+BOOL check_mac_addr(CONST TCHAR* szMac);
+BOOL check_adapter_name(CONST TCHAR* szName);
 BOOL GetOSDisplayString(LPTSTR pszOS);
 DWORD GetProccessIDByName(TCHAR* szProcessNameTarget);
-DWORD GetProcessIdFromName(LPCTSTR ProcessName);
+DWORD GetProcessIdFromName(CONST LPCTSTR ProcessName);
 BOOL SetPrivilege(HANDLE, LPCTSTR, BOOL);
 BOOL SetDebugPrivileges(VOID);
 DWORD GetMainThreadId(DWORD pid);
-BOOL InitWMI(IWbemServices **pSvc, IWbemLocator **pLoc, TCHAR* szNetworkResource);
-BOOL ExecWMIQuery(IWbemServices **pSvc, IWbemLocator **pLoc, IEnumWbemClassObject **pEnumerator, TCHAR* szQuery);
+BOOL InitWMI(IWbemServices **pSvc, IWbemLocator **pLoc, CONST TCHAR* szNetworkResource);
+BOOL ExecWMIQuery(IWbemServices **pSvc, IWbemLocator **pLoc, IEnumWbemClassObject **pEnumerator, CONST TCHAR* szQuery);
 ULONG get_idt_base();
 ULONG get_ldt_base();
 ULONG get_gdt_base();

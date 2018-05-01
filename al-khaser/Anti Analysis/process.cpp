@@ -6,7 +6,7 @@ Check for process list
 
 VOID analysis_tools_process()
 {
-	TCHAR *szProcesses[] = {
+	CONST TCHAR *szProcesses[] = {
 		_T("ollydbg.exe"),			// OllyDebug debugger
 		_T("ProcessHacker.exe"),	// Process Hacker
 		_T("tcpview.exe"),			// Part of Sysinternals Suite

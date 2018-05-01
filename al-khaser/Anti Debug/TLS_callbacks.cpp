@@ -14,7 +14,7 @@ VOID  WINAPI tls_callback(PVOID hModule, DWORD dwReason, PVOID pContext)
 
 	if (dwReason == DLL_PROCESS_ATTACH)
 	{
-		MessageBox(0, _T("I am running from a TLS callbacks, did you see that?"), _T("DLL_PROCESS_ATTACH"), 0);
+		//MessageBox(0, _T("I am running from a TLS callbacks, did you see that?"), _T("DLL_PROCESS_ATTACH"), 0);
 	}
 }
 

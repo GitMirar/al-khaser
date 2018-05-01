@@ -20,7 +20,7 @@ BOOL IsWoW64()
 	return bIsWow64;
 }
 
-BOOL Is_RegKeyValueExists(HKEY hKey, TCHAR* lpSubKey, TCHAR* lpValueName, TCHAR* search_str)
+BOOL Is_RegKeyValueExists(HKEY hKey, CONST TCHAR* lpSubKey, CONST TCHAR* lpValueName, CONST TCHAR* search_str)
 {
 	HKEY hkResult = FALSE;
 	TCHAR lpData[1024] = { 0 };
@@ -42,7 +42,7 @@ BOOL Is_RegKeyValueExists(HKEY hKey, TCHAR* lpSubKey, TCHAR* lpValueName, TCHAR*
 
 }
 
-BOOL Is_RegKeyExists(HKEY hKey, TCHAR* lpSubKey)
+BOOL Is_RegKeyExists(HKEY hKey, CONST TCHAR* lpSubKey)
 {
 	HKEY hkResult = FALSE;
 	TCHAR lpData[1024] = { 0 };
@@ -69,7 +69,7 @@ BOOL is_DirectoryExists(TCHAR* szPath)
 	return (dwAttrib != INVALID_FILE_ATTRIBUTES) && (dwAttrib & FILE_ATTRIBUTE_DIRECTORY);
 }
 
-BOOL check_mac_addr(TCHAR* szMac)
+BOOL check_mac_addr(CONST TCHAR* szMac)
 {
 	BOOL bResult = FALSE;
 	PIP_ADAPTER_INFO pAdapterInfo;
@@ -117,7 +117,7 @@ BOOL check_mac_addr(TCHAR* szMac)
 	return bResult;
 }
 
-BOOL check_adapter_name(TCHAR* szName)
+BOOL check_adapter_name(CONST TCHAR* szName)
 {
 	BOOL bResult = FALSE;
 	PIP_ADAPTER_INFO pAdapterInfo;
@@ -531,7 +531,7 @@ BOOL SetDebugPrivileges(VOID) {
 	}
 }
 
-DWORD GetProcessIdFromName(LPCTSTR szProcessName)
+DWORD GetProcessIdFromName(CONST LPCTSTR szProcessName)
 {
 	PROCESSENTRY32 pe32;
 	HANDLE hSnapshot = NULL;
@@ -618,7 +618,7 @@ DWORD GetMainThreadId(DWORD pid)
 	return (DWORD)0;
 }
 
-BOOL InitWMI(IWbemServices **pSvc, IWbemLocator **pLoc, TCHAR* szNetworkResource)
+BOOL InitWMI(IWbemServices **pSvc, IWbemLocator **pLoc, CONST TCHAR* szNetworkResource)
 {
 	// Initialize COM.
 	HRESULT hres;
@@ -645,7 +645,7 @@ BOOL InitWMI(IWbemServices **pSvc, IWbemLocator **pLoc, TCHAR* szNetworkResource
 	}
 
 	// Connect to the root\cimv2 namespace 
-	hres = (*pLoc)->ConnectServer(szNetworkResource, NULL, NULL, 0, NULL, 0, 0, pSvc);
+	hres = (*pLoc)->ConnectServer(BSTR(szNetworkResource), NULL, NULL, 0, NULL, 0, 0, pSvc);
 	if (FAILED(hres)) {
 		print_last_error(_T("ConnectServer"));
 		(*pLoc)->Release();
@@ -667,10 +667,10 @@ BOOL InitWMI(IWbemServices **pSvc, IWbemLocator **pLoc, TCHAR* szNetworkResource
 	return 1;
 }
 
-BOOL ExecWMIQuery(IWbemServices **pSvc, IWbemLocator **pLoc, IEnumWbemClassObject **pEnumerator, TCHAR* szQuery)
+BOOL ExecWMIQuery(IWbemServices **pSvc, IWbemLocator **pLoc, IEnumWbemClassObject **pEnumerator, CONST TCHAR* szQuery)
 {
 	// Execute WMI query
-	HRESULT hres = (*pSvc)->ExecQuery(_T("WQL"), szQuery, WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, NULL, pEnumerator);
+	HRESULT hres = (*pSvc)->ExecQuery(BSTR(_T("WQL")), BSTR(szQuery), WBEM_FLAG_FORWARD_ONLY | WBEM_FLAG_RETURN_IMMEDIATELY, NULL, pEnumerator);
 	if (FAILED(hres))
 	{
 		print_last_error(_T("ExecQuery"));

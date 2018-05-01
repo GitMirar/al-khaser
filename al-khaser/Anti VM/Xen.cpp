@@ -6,7 +6,7 @@ Check for process list
 
 VOID xen_process()
 {
-	TCHAR *szProcesses[] = {
+	CONST TCHAR *szProcesses[] = {
 		_T("xenservice.exe"),
 	};
 

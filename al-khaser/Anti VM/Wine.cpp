@@ -28,7 +28,7 @@ Check against Wine registry keys
 VOID wine_reg_keys()
 {
 	/* Array of strings of blacklisted registry keys */
-	TCHAR* szKeys[] = {
+	CONST TCHAR* szKeys[] = {
 		_T("SOFTWARE\\Wine")
 	};
 

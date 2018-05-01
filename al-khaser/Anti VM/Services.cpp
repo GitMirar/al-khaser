@@ -3,17 +3,17 @@
 BOOL VMDriverServices()
 {
 	const int KnownServiceCount = 10;
-	LPWSTR KnownVMServices[KnownServiceCount] = {
-		L"VBoxDrv",
-		L"VBoxNetAdp",
-		L"VBoxNetLwf",
-		L"VBoxUSB"
-		L"VBoxUSBMon"
-		L"VMnetAdapter"
-		L"VMnetBridge"
-		L"VMnetuserif"
-		L"vmusb"
-		L"vmx86"
+	CONST TCHAR* KnownVMServices[KnownServiceCount] = {
+		_T("VBoxDrv"),
+		_T("VBoxNetAdp"),
+		_T("VBoxNetLwf"),
+		_T("VBoxUSB"),
+		_T("VBoxUSBMon"),
+		_T("VMnetAdapter"),
+		_T("VMnetBridge"),
+		_T("VMnetuserif"),
+		_T("vmusb"),
+		_T("vmx86")
 	};
 
 	SC_HANDLE hSCM = OpenSCManager(NULL, SERVICES_ACTIVE_DATABASE, SC_MANAGER_CONNECT | SC_MANAGER_ENUMERATE_SERVICE);

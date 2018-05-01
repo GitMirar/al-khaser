@@ -9,7 +9,7 @@ VOID loaded_dlls()
 	HMODULE hDll;
 
 	/* Array of strings of blacklisted dlls */
-	TCHAR* szDlls[] = {
+	CONST TCHAR* szDlls[] = {
 		_T("avghookx.dll"),		// AVG
 		_T("avghooka.dll"),		// AVG
 		_T("snxhk.dll"),		// Avast
@@ -483,7 +483,7 @@ BOOL cpuid_hypervisor_vendor()
 {
 	INT CPUInfo[4] = {-1};
 	CHAR szHypervisorVendor[0x40];
-	TCHAR* szBlacklistedHypervisors[] = {
+	CONST TCHAR* szBlacklistedHypervisors[] = {
 		_T("KVMKVMKVM\0\0\0"),	/* KVM */
 		_T("Microsoft Hv"),		/* Microsoft Hyper-V or Windows Virtual PC */
 		_T("VMwareVMware"),		/* VMware */

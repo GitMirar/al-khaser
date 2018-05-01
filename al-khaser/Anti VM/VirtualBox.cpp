@@ -7,7 +7,7 @@ Registry key values
 VOID vbox_reg_key_value()
 {
 	/* Array of strings of blacklisted registry key values */
-	TCHAR *szEntries[][3] = {
+	CONST TCHAR *szEntries[][3] = {
 		{ _T("HARDWARE\\DEVICEMAP\\Scsi\\Scsi Port 0\\Scsi Bus 0\\Target Id 0\\Logical Unit Id 0"), _T("Identifier"), _T("VBOX") },
 		{ _T("HARDWARE\\Description\\System"), _T("SystemBiosVersion"), _T("VBOX") },
 		{ _T("HARDWARE\\Description\\System"), _T("VideoBiosVersion"), _T("VIRTUALBOX") },
@@ -18,7 +18,8 @@ VOID vbox_reg_key_value()
 
 	for (int i = 0; i < dwLength; i++)
 	{
-		TCHAR msg[256] = _T("");
+		TCHAR a[] = _T("frr");
+		TCHAR msg[256] = { 0 };
 		_stprintf_s(msg, sizeof(msg) / sizeof(TCHAR), _T("Checking reg key HARDWARE\\Description\\System - %s is set to %s:"), szEntries[i][1], szEntries[i][2]);
 		if (Is_RegKeyValueExists(HKEY_LOCAL_MACHINE, szEntries[i][0], szEntries[i][1], szEntries[i][2]))
 			print_results(TRUE, msg);
@@ -33,7 +34,7 @@ Check against virtualbox registry keys
 VOID vbox_reg_keys()
 {
 	/* Array of strings of blacklisted registry keys */
-	TCHAR* szKeys[] = {
+	CONST TCHAR* szKeys[] = {
 		_T("HARDWARE\\ACPI\\DSDT\\VBOX__"),
 		_T("HARDWARE\\ACPI\\FADT\\VBOX__"),
 		_T("HARDWARE\\ACPI\\RSDT\\VBOX__"),
@@ -66,7 +67,7 @@ Check against virtualbox blacklisted files
 VOID vbox_files()
 {
 	/* Array of strings of blacklisted paths */
-	TCHAR* szPaths[] = {
+	CONST TCHAR* szPaths[] = {
 		_T("system32\\drivers\\VBoxMouse.sys"),
 		_T("system32\\drivers\\VBoxGuest.sys"),
 		_T("system32\\drivers\\VBoxSF.sys"),
@@ -141,7 +142,7 @@ Check against pseaudo-devices
 */
 VOID vbox_devices()
 {
-	TCHAR *devices[] = {
+	CONST TCHAR *devices[] = {
 		_T("\\\\.\\VBoxMiniRdrDN"),
 		_T("\\\\.\\VBoxGuest"),
 		_T("\\\\.\\pipe\\VBoxMiniRdDN"),
@@ -200,7 +201,7 @@ Check for process list
 
 VOID vbox_processes()
 {
-	TCHAR *szProcesses[] = {
+	CONST TCHAR *szProcesses[] = {
 		_T("vboxservice.exe"),
 		_T("vboxtray.exe")
 	};
@@ -252,7 +253,7 @@ BOOL vbox_devices_wmi()
 				hRes = pclsObj->Get(_T("DeviceId"), 0, &vtProp, 0, 0);
 				
 				// Do our comparaison
-				if (_tcsstr(vtProp.bstrVal, _T("PCI\\VEN_80EE&DEV_CAFE")) != 0)
+				if (wcsstr(vtProp.bstrVal, _T("PCI\\VEN_80EE&DEV_CAFE")) != 0)
 				{
 					bFound = TRUE;
 					break;

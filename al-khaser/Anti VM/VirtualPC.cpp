@@ -6,7 +6,7 @@ Check for process list
 
 VOID virtual_pc_process()
 {
-	TCHAR *szProcesses[] = {
+	CONST TCHAR *szProcesses[] = {
 		_T("VMSrvc.exe"),
 		_T("VMUSrvc.exe"),
 	};
@@ -28,7 +28,7 @@ VOID virtual_pc_process()
 VOID virtual_pc_reg_keys()
 {
 	/* Array of strings of blacklisted registry keys */
-	TCHAR* szKeys[] = {
+	CONST TCHAR* szKeys[] = {
 		_T("SOFTWARE\\Microsoft\\Virtual Machine\\Guest\\Parameters"),
 	};
 
