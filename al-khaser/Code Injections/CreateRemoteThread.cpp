@@ -8,7 +8,11 @@ BOOL CreateRemoteThread_Injection()
 	HMODULE hKernel32;
 	FARPROC LoadLibraryAddress;
 	LPVOID lpBaseAddress;
-	TCHAR lpDllName[] = _T("InjectedDLL.dll");
+#ifdef _WIN64
+	TCHAR lpDllName[] = _T("InjectedDLL_x86_64.dll");
+#else
+	TCHAR lpDllName[] = _T("InjectedDLL_x86.dll");
+#endif
 	TCHAR lpDllPath[MAX_PATH];
 	BOOL bStatus;
 	
