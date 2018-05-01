@@ -3,7 +3,7 @@
 #include <Windows.h>
 #include "Shared\Main.h"
 
-int main(void)
+int main(int argc, char *argv[])
 {
 	/* enable functions */
 	BOOL	ENABLE_DEBUG_CHECKS = TRUE;
@@ -19,10 +19,20 @@ int main(void)
 	BOOL	ENABLE_TIMING_ATTACKS = TRUE;
 	BOOL	ENABLE_DUMPING_CHECK = TRUE;
 	BOOL	ENABLE_ANALYSIS_TOOLS_CHECK = TRUE;
+	BOOL    ENABLE_SLOW_CHECKS = FALSE;
 
 	/* Display general informations */
 	_tprintf(_T("[al-khaser version 0.74]"));
 	print_os();
+
+	if ((argc > 1) && strcmp("/slow", argv[1]) == 0) {
+		/* Enable time consuming checks only when provided with /slow parameter */
+		ENABLE_SLOW_CHECKS = TRUE;
+		_tprintf(_T("Slow checks have been enabled\n\n"));
+	}
+	else {
+		_tprintf(_T("Slow checks have been disabled, enable with /slow flag\n\n"));
+	}
 
 	if (IsWoW64())
 		_tprintf(_T("Process is running under WOW64\n\n"));
@@ -81,7 +91,9 @@ int main(void)
 		exec_check(&disk_size_getdiskfreespace, TEXT("Checking disk size using GetDiskFreeSpaceEx: "));
 		exec_check(&cpuid_is_hypervisor, TEXT("Checking if CPU hypervisor field is set using cpuid(0x1)"));
 		exec_check(&cpuid_hypervisor_vendor, TEXT("Checking hypervisor vendor using cpuid(0x40000000)"));
-		exec_check(&accelerated_sleep, TEXT("Check if time has been accelerated: "));
+		if (ENABLE_SLOW_CHECKS) {
+			exec_check(&accelerated_sleep, TEXT("Check if time has been accelerated: "));
+		}
 		exec_check(&VMDriverServices, TEXT("VM Driver Services : "));
 		exec_check(&serial_number_bios_wmi, TEXT("Checking SerialNumber from BIOS using WMI: "));
 		exec_check(&model_computer_system_wmi, TEXT("Checking Model from ComputerSystem using WMI: "));
@@ -178,29 +190,31 @@ int main(void)
 		UINT delayInMilliSeconds = delayInSeconds * 1000U;
 		printf("\n[*] Delay value is set to %u minutes ...\n", delayInSeconds / 60);
 
-		_tprintf(_T("[+] Performing a sleep using NtDelayexecution:\n"));
-		timing_NtDelayexecution(delayInMilliSeconds);
-		print_results(FALSE, _T("NtDelayexecution was bypassed ... "));
+		if (ENABLE_SLOW_CHECKS) {
+			_tprintf(_T("[+] Performing a sleep using NtDelayexecution:\n"));
+			timing_NtDelayexecution(delayInMilliSeconds);
+			print_results(FALSE, _T("NtDelayexecution was bypassed ... "));
 
-		_tprintf(_T("[+] Performing a sleep() in a loop:\n"));
-		timing_sleep_loop(delayInMilliSeconds);
-		print_results(FALSE, _T("Sleep in loop was bypassed ... "));
+			_tprintf(_T("[+] Performing a sleep() in a loop:\n"));
+			timing_sleep_loop(delayInMilliSeconds);
+			print_results(FALSE, _T("Sleep in loop was bypassed ... "));
 
-		_tprintf(_T("[*] Delaying execution using SetTimer():\n"));
-		timing_SetTimer(delayInMilliSeconds);
-		print_results(FALSE, _T("timing_SetTimer was bypassed ... "));
+			_tprintf(_T("[*] Delaying execution using SetTimer():\n"));
+			timing_SetTimer(delayInMilliSeconds);
+			print_results(FALSE, _T("timing_SetTimer was bypassed ... "));
 
-		_tprintf(_T("[*] Delaying execution using timeSetEvent():\n"));
-		timing_timeSetEvent(delayInMilliSeconds);
-		print_results(FALSE, _T("timeSetEvent was bypassed ... "));
+			_tprintf(_T("[*] Delaying execution using timeSetEvent():\n"));
+			timing_timeSetEvent(delayInMilliSeconds);
+			print_results(FALSE, _T("timeSetEvent was bypassed ... "));
 
-		_tprintf(_T("[*] Delaying execution using WaitForSingleObject():\n"));
-		timing_WaitForSingleObject(delayInMilliSeconds);
-		print_results(FALSE, _T("WaitForSingleObject was bypassed ... "));
+			_tprintf(_T("[*] Delaying execution using WaitForSingleObject():\n"));
+			timing_WaitForSingleObject(delayInMilliSeconds);
+			print_results(FALSE, _T("WaitForSingleObject was bypassed ... "));
 
-		_tprintf(_T("[*] Delaying execution using IcmpSendEcho():\n"));
-		timing_IcmpSendEcho(delayInMilliSeconds);
-		print_results(FALSE, _T("IcmpSendEcho was bypassed ... "));
+			_tprintf(_T("[*] Delaying execution using IcmpSendEcho():\n"));
+			timing_IcmpSendEcho(delayInMilliSeconds);
+			print_results(FALSE, _T("IcmpSendEcho was bypassed ... "));
+		}
 
 		exec_check(&rdtsc_diff_locky, TEXT("Checking RDTSC Locky trick: "));
 		exec_check(&rdtsc_diff_vmexit, TEXT("Checking RDTSC which force a VM Exit (cpuid): "));
@@ -221,6 +235,5 @@ int main(void)
 
 	_tprintf(_T("\n\nAnalysis done, I hope you didn't get red flags :)"));
 
-	getchar();
 	return 0;
 }
