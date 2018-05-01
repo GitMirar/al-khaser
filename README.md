@@ -5,6 +5,6 @@ This is a fork of the original Al-Khaser repository with the aim of porting the 
 ## TODOs
 
 - [x] x86_64 buildconfig
-- [ ] `--fast` option
+- [x] `/slow` option
 - [ ] port DLL injection
 - [ ] library implementation
