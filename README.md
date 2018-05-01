@@ -6,5 +6,5 @@ This is a fork of the original Al-Khaser repository with the aim of porting the 
 
 - [x] x86_64 buildconfig
 - [x] `/slow` option
-- [ ] port DLL injection
+- [x] port DLL injection
 - [ ] library implementation
