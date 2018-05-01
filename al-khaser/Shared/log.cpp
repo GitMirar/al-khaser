@@ -19,9 +19,7 @@ TCHAR* print_time()
 	TCHAR *timestr = _tasctime(localtime(&t));
 	timestr[_tcsclen(timestr) - 1] = 0;  //Getting rid of \n
 
-	// size computation seems to be off
-	//size = (_tcsclen(timestr) + 1 + 2) * sizeof(TCHAR); //Additional +2 for square braces
-	size = 0x400;
+	size = (_tcsclen(timestr) + 1 + 2) * sizeof(TCHAR); //Additional +2 for square braces
 	buf = (TCHAR*)malloc(size);
 
 	memset(buf, 0x0, size);

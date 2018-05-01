@@ -1,6 +1,4 @@
 #include "SoftwareBreakpoints.h"
-#include <stdio.h>
-
 
 /*
 Software breakpoints aka INT 3 represented in the IA-32 instruction set with the opcode CC (0xCC).

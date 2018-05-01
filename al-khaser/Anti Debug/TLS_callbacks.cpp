@@ -6,6 +6,7 @@
 
 VOID  WINAPI tls_callback(PVOID hModule, DWORD dwReason, PVOID pContext)
 {
+	// Do nothing for now
 	if (dwReason == DLL_THREAD_ATTACH)
 	{
 		// This will be loaded in each DLL thread attach

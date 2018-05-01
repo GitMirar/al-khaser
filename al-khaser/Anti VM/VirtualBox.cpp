@@ -18,8 +18,7 @@ VOID vbox_reg_key_value()
 
 	for (int i = 0; i < dwLength; i++)
 	{
-		TCHAR a[] = _T("frr");
-		TCHAR msg[256] = { 0 };
+		TCHAR msg[256] = _T("");
 		_stprintf_s(msg, sizeof(msg) / sizeof(TCHAR), _T("Checking reg key HARDWARE\\Description\\System - %s is set to %s:"), szEntries[i][1], szEntries[i][2]);
 		if (Is_RegKeyValueExists(HKEY_LOCAL_MACHINE, szEntries[i][0], szEntries[i][1], szEntries[i][2]))
 			print_results(TRUE, msg);
