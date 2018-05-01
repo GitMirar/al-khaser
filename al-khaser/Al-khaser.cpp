@@ -20,9 +20,6 @@ int main(void)
 	BOOL	ENABLE_DUMPING_CHECK = TRUE;
 	BOOL	ENABLE_ANALYSIS_TOOLS_CHECK = TRUE;
 
-	/* Resize the console window for better visibility */
-	resize_console_window();
-
 	/* Display general informations */
 	_tprintf(_T("[al-khaser version 0.74]"));
 	print_os();
